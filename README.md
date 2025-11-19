@@ -53,7 +53,14 @@ docker-compose down
 ```
 
 ## Local Admin User (No Gatekeeper)
-if you are not using the OpenAgri Gatekeeper service to provide authentication and user management, then you should remove the `GATEKEEPER_LOGIN_URL` configuration from your `.env` file. This will make your Farm Calendar service work with its own internal user authentication (using Django's auth and password process). In this case, to create your admin user you should run:
+If you are not using the OpenAgri Gatekeeper service to provide authentication and user management, then you should remove the `GATEKEEPER_LOGIN_URL` configuration from your `.env` file. This will make your Farm Calendar service work with its own internal user authentication (using Django's auth and password process).
+
+In this case, you need to first run the following for initial setup:
+```
+$ docker compose run --rm web python3 manage.py initial_setup
+```
+
+And then you can create your admin user by running:
 ```
 $ docker compose run --rm web python3 manage.py createsuperuser
 ```
