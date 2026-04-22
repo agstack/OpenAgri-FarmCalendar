@@ -69,6 +69,10 @@ class FarmAnimal(FarmAsset):
         s = f"{self.species} - {self.breed}"
         if self.animal_group:
             s += f' ({self.animal_group})'
+        if self.name:
+            s = f'{self.name} - ' + s
+        if self.national_id:
+            s = f'{self.national_id} - ' + s
         return s
 
 

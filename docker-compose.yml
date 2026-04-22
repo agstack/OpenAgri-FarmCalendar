@@ -1,39 +1,27 @@
-version: '3.9'
-
 services:
-  oa_fc_postgres:
+  db:
     image: postgres:16.3
-    container_name: oa_fc_postgres
     ports:
       - "5432:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    restart: no
 
-  oa_fc_pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: oa_fc_pgadmin
-    ports:
-      - "5050:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-    depends_on:
-      - oa_fc_postgres
-    restart: no
+  service:
+    image: ghcr.io/${DOCKER_REGISTRY}/openagri-farmcalendar:${TAG}
+    build:
+      context: .
+      args:
+        SOURCE_REPO: ${SOURCE_REPO}
 
-  web:
-    build: .
-    image: ghcr.io/openagri-eu/openagri-farmcalendar:latest
     command: /var/www/entrypoint.sh
     ports:
       - "${APP_PORT}:${APP_PORT}"
     depends_on:
-      - oa_fc_postgres
+      - db
     environment:
-      POSTGRES_HOST: oa_fc_postgres
+      POSTGRES_HOST: db
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

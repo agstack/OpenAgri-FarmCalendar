@@ -38,11 +38,13 @@ class URNCharField(serializers.CharField):
         """
         Converts a URN string into a model instance.
         """
+        if data is None:
+            return data
         if not self.class_name == '{class_name}':
-            if not isinstance(data, dict) or not data.get('@type', '').lower() == self.class_name.lower() or not data.get('@id', '').startswith(f"{self.urn_prefix}:"):
+            if not isinstance(data, dict) or '@type' not in data or '@id' not in data:
                 raise serializers.ValidationError((
                     f"Invalid URN ref dict format. Expected a dictionary with "
-                    f"@type' as '{self.class_name}' and '@id' with prefix '{self.urn_prefix}:'."
+                    f"@type' (e.g., '{self.class_name}') and '@id' (e.g, with prefix '{self.urn_prefix}:')."
                     f" Received'{data}' instead."
                 ))
             urn_data = data["@id"]
@@ -96,14 +98,16 @@ class URNRelatedField(PrimaryKeyRelatedField):
         """
         Converts a URN string into a model instance.
         """
+        if data is None:
+            return data
         if isinstance(data, str):
             urn_data = data
         else:
             if not self.class_name == '{class_name}':
-                if not isinstance(data, dict) or not data.get('@type', '').lower() == self.class_name.lower() or not data.get('@id', '').startswith(f"{self.urn_prefix}:"):
+                if not isinstance(data, dict) or '@type' not in data or '@id' not in data:
                     raise serializers.ValidationError((
                         f"Invalid URN ref dict format. Expected a dictionary with "
-                        f"@type' as '{self.class_name}' and '@id' with prefix '{self.urn_prefix}:'."
+                        f"@type' (e.g., '{self.class_name}') and '@id' (e.g, with prefix '{self.urn_prefix}:')."
                         f" Received'{data}' instead."
                     ))
             urn_data = data["@id"]

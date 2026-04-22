@@ -161,3 +161,45 @@ class AddRawMaterialCompostQuantity(models.Model):
 
     applied_amount = models.DecimalField(max_digits=10, decimal_places=2)
     applied_amount_unit = models.CharField(max_length=255)
+
+
+class AnimalActivity(FarmCalendarActivity):
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['animal_activity']['name']
+
+    class Meta:
+        verbose_name = "Animal Activity"
+        verbose_name_plural = "Animal Activities"
+
+    animal = models.ForeignKey('farm_management.FarmAnimal', on_delete=models.SET_NULL, blank=True, null=True)
+
+class AnimalLactatingActivity(AnimalActivity):
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['animal_lactating_activity']['name']
+
+    days_in_milk = models.DecimalField(max_digits=10, decimal_places=2)
+    lactation_number = models.DecimalField(max_digits=10, decimal_places=2)
+    control = models.CharField(max_length=255)
+
+    total_milk_yield_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    total_milk_yield_unit = models.CharField(max_length=255)
+
+    milk_yield_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    milk_yield_unit = models.CharField(max_length=255)
+
+    rcs_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    rcs_unit = models.CharField(max_length=255)
+
+    urea_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    urea_unit = models.CharField(max_length=255)
+
+    fat_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    fat_unit = models.CharField(max_length=255)
+
+    protein_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    protein_unit = models.CharField(max_length=255)
+
+    dry_matter_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    dry_matter_unit = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "Animal Lactating Activity"
+        verbose_name_plural = "Animal Lactating Activities"

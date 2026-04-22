@@ -17,6 +17,8 @@ from farm_activities.models import (
     CompostOperation,
     AddRawMaterialOperation,
     CompostTurningOperation,
+    AnimalActivity,
+    AnimalLactatingActivity,
 )
 from ..serializers import (
     FarmCalendarActivitySerializer,
@@ -35,6 +37,8 @@ from ..serializers import (
     CompostOperationSerializer,
     AddRawMaterialOperationSerializer,
     CompostTurningOperationSerializer,
+    AnimalActivitySerializer,
+    AnimalLactatingActivitySerializer,
 )
 
 from ..filters import (
@@ -52,7 +56,9 @@ from ..filters import (
     SprayingRecommendationObservationFilter,
     CompostOperationFilter,
     AddRawMaterialOperationFilter,
-    CompostTurningOperationFilter
+    CompostTurningOperationFilter,
+    AnimalActivityFilter,
+    AnimalLactatingActivityFilter,
 )
 
 
@@ -241,3 +247,21 @@ class CompostTurningOperationViewSet(viewsets.ModelViewSet):
         if self.kwargs.get('compost_operation_pk'):
             queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
         return queryset
+
+class AnimalActivityViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows AnimalActivity to be viewed or edited.
+    """
+    queryset = AnimalActivity.objects.all().order_by('-start_datetime')
+    serializer_class = AnimalActivitySerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_class = AnimalActivityFilter
+
+class AnimalLactatingActivityViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows AnimalLactatingActivity to be viewed or edited.
+    """
+    queryset = AnimalLactatingActivity.objects.all().order_by('-start_datetime')
+    serializer_class = AnimalLactatingActivitySerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_class = AnimalLactatingActivityFilter

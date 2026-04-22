@@ -19,6 +19,8 @@ def get_generic_farm_calendar_activity_form(activity_type):
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_operation']['name']: CompostOperationForm,
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name']: AddRawMaterialOperationForm,
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_turning_operation']['name']: CompostTurningOperationForm,
+        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['animal_activity']['name']: AnimalActivityForm,
+        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['animal_lactating_activity']['name']: AnimalLactatingActivityForm,
     }
 
     activity_type_instance = FarmCalendarActivityType.objects.filter(name=activity_type).first()

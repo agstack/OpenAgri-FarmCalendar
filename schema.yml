@@ -731,6 +731,494 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/AnimalActivities/:
+    get:
+      operationId: api_v1_AnimalActivities_list
+      description: API endpoint that allows AnimalActivity to be viewed or edited.
+      parameters:
+      - in: query
+        name: activity_type
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: animal
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: query
+        name: fromDate
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: parcel
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: title
+        schema:
+          type: string
+      - in: query
+        name: toDate
+        schema:
+          type: string
+          format: date-time
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnimalActivity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnimalActivity'
+          description: ''
+    post:
+      operationId: api_v1_AnimalActivities_create
+      description: API endpoint that allows AnimalActivity to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalActivity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnimalActivity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnimalActivity'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AnimalActivity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalActivity'
+          description: ''
+  /api/v1/AnimalActivities/{id}/:
+    get:
+      operationId: api_v1_AnimalActivities_retrieve
+      description: API endpoint that allows AnimalActivity to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Animal Activity.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AnimalActivity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalActivity'
+          description: ''
+    put:
+      operationId: api_v1_AnimalActivities_update
+      description: API endpoint that allows AnimalActivity to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Animal Activity.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalActivity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnimalActivity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnimalActivity'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AnimalActivity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalActivity'
+          description: ''
+    patch:
+      operationId: api_v1_AnimalActivities_partial_update
+      description: API endpoint that allows AnimalActivity to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Animal Activity.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAnimalActivity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAnimalActivity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAnimalActivity'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AnimalActivity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalActivity'
+          description: ''
+    delete:
+      operationId: api_v1_AnimalActivities_destroy
+      description: API endpoint that allows AnimalActivity to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Animal Activity.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/AnimalLactatingActivities/:
+    get:
+      operationId: api_v1_AnimalLactatingActivities_list
+      description: API endpoint that allows AnimalLactatingActivity to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: activity_type
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: animal
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: query
+        name: fromDate
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: parcel
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: title
+        schema:
+          type: string
+      - in: query
+        name: toDate
+        schema:
+          type: string
+          format: date-time
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnimalLactatingActivity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnimalLactatingActivity'
+          description: ''
+    post:
+      operationId: api_v1_AnimalLactatingActivities_create
+      description: API endpoint that allows AnimalLactatingActivity to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalLactatingActivity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnimalLactatingActivity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnimalLactatingActivity'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AnimalLactatingActivity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalLactatingActivity'
+          description: ''
+  /api/v1/AnimalLactatingActivities/{id}/:
+    get:
+      operationId: api_v1_AnimalLactatingActivities_retrieve
+      description: API endpoint that allows AnimalLactatingActivity to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Animal Lactating Activity.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AnimalLactatingActivity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalLactatingActivity'
+          description: ''
+    put:
+      operationId: api_v1_AnimalLactatingActivities_update
+      description: API endpoint that allows AnimalLactatingActivity to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Animal Lactating Activity.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalLactatingActivity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnimalLactatingActivity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnimalLactatingActivity'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AnimalLactatingActivity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalLactatingActivity'
+          description: ''
+    patch:
+      operationId: api_v1_AnimalLactatingActivities_partial_update
+      description: API endpoint that allows AnimalLactatingActivity to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Animal Lactating Activity.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAnimalLactatingActivity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAnimalLactatingActivity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAnimalLactatingActivity'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AnimalLactatingActivity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalLactatingActivity'
+          description: ''
+    delete:
+      operationId: api_v1_AnimalLactatingActivities_destroy
+      description: API endpoint that allows AnimalLactatingActivity to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Animal Lactating Activity.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/v1/CompostOperations/:
     get:
       operationId: api_v1_CompostOperations_list
@@ -7016,6 +7504,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AddRawMaterialCompostQuantity'
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
       - hasCompostMaterial
@@ -7122,6 +7614,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         validFrom:
           type: string
           format: date-time
@@ -7142,11 +7635,152 @@ components:
       required:
       - activityType
       - dateIssued
-      - hasAgriParcel
       - id
       - relatedObservation
       - validFrom
       - validTo
+    AnimalActivity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        activityType:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        hasAgriParcel:
+          type: string
+          format: uuid
+          nullable: true
+        hasAnimal:
+          type: string
+          format: uuid
+          nullable: true
+        responsibleAgent:
+          type: string
+          nullable: true
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: string
+            format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
+        hasMeasurement:
+          type: array
+          items:
+            type: string
+            format: uuid
+          readOnly: true
+      required:
+      - activityType
+      - hasAnimal
+      - hasMeasurement
+      - hasStartDatetime
+      - id
+      - usesAgriculturalMachinery
+    AnimalLactatingActivity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        activityType:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        hasAgriParcel:
+          type: string
+          format: uuid
+          nullable: true
+        hasAnimal:
+          type: string
+          format: uuid
+          nullable: true
+        responsibleAgent:
+          type: string
+          nullable: true
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: string
+            format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
+        hasMeasurement:
+          type: array
+          items:
+            type: string
+            format: uuid
+          readOnly: true
+        hasDaysInMilk:
+          type: string
+        hasLactationNumber:
+          type: string
+        hasControl:
+          type: string
+        hasTotalMilkYield:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasMilkYield:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasRCS:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasUrea:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasFat:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasProtein:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasDryMatter:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+      required:
+      - activityType
+      - hasAnimal
+      - hasControl
+      - hasDaysInMilk
+      - hasDryMatter
+      - hasFat
+      - hasLactationNumber
+      - hasMeasurement
+      - hasMilkYield
+      - hasProtein
+      - hasRCS
+      - hasStartDatetime
+      - hasTotalMilkYield
+      - hasUrea
+      - id
+      - usesAgriculturalMachinery
     AppliedAmmountField:
       type: object
       properties:
@@ -7203,6 +7837,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         isOperatedOn:
           type: string
         hasNestedOperation:
@@ -7217,9 +7852,12 @@ components:
             type: string
             format: uuid
           readOnly: true
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
-      - hasAgriParcel
       - hasMeasurement
       - hasNestedOperation
       - hasStartDatetime
@@ -7260,6 +7898,10 @@ components:
           items:
             type: string
             format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
       - hasStartDatetime
@@ -7306,6 +7948,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasAgriCrop:
           type: string
           format: uuid
@@ -7313,10 +7956,13 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
       - hasAgriCrop
-      - hasAgriParcel
       - hasResult
       - id
       - observedProperty
@@ -7361,6 +8007,10 @@ components:
         operatedOn:
           type: string
           format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
       - hasAppliedAmount
@@ -7409,6 +8059,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasAgriCrop:
           type: string
           format: uuid
@@ -7416,10 +8067,13 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
       - hasAgriCrop
-      - hasAgriParcel
       - hasResult
       - id
       - observedProperty
@@ -7454,6 +8108,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasArea:
           type: string
           format: decimal
@@ -7462,9 +8117,12 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
-      - hasAgriParcel
       - hasArea
       - hasResult
       - id
@@ -7620,6 +8278,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         responsibleAgent:
           type: string
           nullable: true
@@ -7628,9 +8287,12 @@ components:
           items:
             type: string
             format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
-      - hasAgriParcel
       - hasStartDatetime
       - id
       - usesAgriculturalMachinery
@@ -7865,6 +8527,10 @@ components:
         operatedOn:
           type: string
           format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
       - hasApplicationMethod
@@ -8021,6 +8687,10 @@ components:
         operatedOn:
           type: string
           format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
       - hasAppliedAmount
@@ -8077,6 +8747,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         madeBySensor:
           allOf:
           - $ref: '#/components/schemas/MadeBySensorField'
@@ -8085,9 +8756,12 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
-      - hasAgriParcel
       - hasResult
       - id
       - observedProperty
@@ -8144,6 +8818,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AddRawMaterialCompostQuantity'
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedAgriculturalMachine:
       type: object
       properties:
@@ -8210,6 +8888,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         validFrom:
           type: string
           format: date-time
@@ -8227,6 +8906,124 @@ components:
           type: string
           format: uuid
           nullable: true
+    PatchedAnimalActivity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        activityType:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        hasAgriParcel:
+          type: string
+          format: uuid
+          nullable: true
+        hasAnimal:
+          type: string
+          format: uuid
+          nullable: true
+        responsibleAgent:
+          type: string
+          nullable: true
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: string
+            format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
+        hasMeasurement:
+          type: array
+          items:
+            type: string
+            format: uuid
+          readOnly: true
+    PatchedAnimalLactatingActivity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        activityType:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        hasAgriParcel:
+          type: string
+          format: uuid
+          nullable: true
+        hasAnimal:
+          type: string
+          format: uuid
+          nullable: true
+        responsibleAgent:
+          type: string
+          nullable: true
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: string
+            format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
+        hasMeasurement:
+          type: array
+          items:
+            type: string
+            format: uuid
+          readOnly: true
+        hasDaysInMilk:
+          type: string
+        hasLactationNumber:
+          type: string
+        hasControl:
+          type: string
+        hasTotalMilkYield:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasMilkYield:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasRCS:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasUrea:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasFat:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasProtein:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        hasDryMatter:
+          $ref: '#/components/schemas/GenericQuantityValueField'
     PatchedCompostOperation:
       type: object
       properties:
@@ -8261,6 +9058,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         isOperatedOn:
           type: string
         hasNestedOperation:
@@ -8275,6 +9073,10 @@ components:
             type: string
             format: uuid
           readOnly: true
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedCompostTurningOperation:
       type: object
       properties:
@@ -8309,6 +9111,10 @@ components:
           items:
             type: string
             format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedCropGrowthStageObservation:
       type: object
       properties:
@@ -8339,6 +9145,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasAgriCrop:
           type: string
           format: uuid
@@ -8346,6 +9153,10 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedCropProtectionOperation:
       type: object
       properties:
@@ -8386,6 +9197,10 @@ components:
         operatedOn:
           type: string
           format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedCropStressIndicatorObservation:
       type: object
       properties:
@@ -8416,6 +9231,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasAgriCrop:
           type: string
           format: uuid
@@ -8423,6 +9239,10 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedDiseaseDetectionObservation:
       type: object
       properties:
@@ -8453,6 +9273,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasArea:
           type: string
           format: decimal
@@ -8461,6 +9282,10 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedFarm:
       type: object
       properties:
@@ -8586,6 +9411,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         responsibleAgent:
           type: string
           nullable: true
@@ -8594,6 +9420,10 @@ components:
           items:
             type: string
             format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedFarmCalendarActivityType:
       type: object
       properties:
@@ -8792,6 +9622,10 @@ components:
         operatedOn:
           type: string
           format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedFertilizer:
       type: object
       properties:
@@ -8904,6 +9738,10 @@ components:
         operatedOn:
           type: string
           format: uuid
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedObservation:
       type: object
       properties:
@@ -8930,6 +9768,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         madeBySensor:
           allOf:
           - $ref: '#/components/schemas/MadeBySensorField'
@@ -8938,6 +9777,10 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedPesticide:
       type: object
       properties:
@@ -9009,6 +9852,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasArea:
           type: string
           format: decimal
@@ -9017,6 +9861,10 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
         usesPesticide:
           type: string
           format: uuid
@@ -9051,6 +9899,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasArea:
           type: string
           format: decimal
@@ -9059,6 +9908,10 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     PatchedYieldPredictionObservation:
       type: object
       properties:
@@ -9089,6 +9942,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasArea:
           type: string
           format: decimal
@@ -9097,6 +9951,10 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
     Pesticide:
       type: object
       properties:
@@ -9203,6 +10061,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasArea:
           type: string
           format: decimal
@@ -9211,13 +10070,16 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
         usesPesticide:
           type: string
           format: uuid
           nullable: true
       required:
       - activityType
-      - hasAgriParcel
       - hasArea
       - hasResult
       - id
@@ -9278,6 +10140,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasArea:
           type: string
           format: decimal
@@ -9286,9 +10149,12 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
-      - hasAgriParcel
       - hasArea
       - hasResult
       - id
@@ -9324,6 +10190,7 @@ components:
         hasAgriParcel:
           type: string
           format: uuid
+          nullable: true
         hasArea:
           type: string
           format: decimal
@@ -9332,9 +10199,12 @@ components:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
+        isPartOfActivity:
+          type: string
+          format: uuid
+          nullable: true
       required:
       - activityType
-      - hasAgriParcel
       - hasArea
       - hasResult
       - id

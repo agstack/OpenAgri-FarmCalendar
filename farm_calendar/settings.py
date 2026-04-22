@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 
-EXTRA_ALLOWED_HOSTS = os.environ.get('EXTRA_ALLOWED_HOSTS', None)
+EXTRA_ALLOWED_HOSTS = config('EXTRA_ALLOWED_HOSTS', default=None)
 if EXTRA_ALLOWED_HOSTS is not None:
     EXTRA_ALLOWED_HOSTS = EXTRA_ALLOWED_HOSTS.split(',')
     ALLOWED_HOSTS.extend(EXTRA_ALLOWED_HOSTS)
@@ -153,7 +153,7 @@ JWT_ALG = 'HS256'
 JWT_SIGNING_KEY = config('JWT_SIGNING_KEY')
 JWT_COOKIE_NAME = config('JWT_COOKIE_NAME')
 JWT_LOCAL_USER_ID_FIELD = config('JWT_LOCAL_USER_ID_FIELD', default='username')
-AUTO_CREATE_AUTH_USER = config('AUTO_CREATE_AUTH_USER', default='True', cast=bool)
+AUTO_CREATE_AUTH_USER = config('AUTO_CREATE_AUTH_USER', default=True, cast=bool)
 POST_AUTH_TOKEN_ATTRIBUTE = config('POST_AUTH_TOKEN_ATTRIBUTE', default='access_token')
 
 #lets igore RSA-based signing for now...
@@ -457,4 +457,24 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'id': '00000000-0000-0000-0000-000000000012',
         'built_in_class': 'farm_activities.SprayingRecommendationObservation',
     },
+    'animal_activity': {
+        'name': 'Animal Activity',
+        'description': 'Animal Activity',
+        'background_color': "#C8AF6A",
+        'border_color': "#725A33",
+        'text_color': '#3B2A1E',
+        'category': 'activity',
+        'id': '00000000-0000-0000-0000-000000000013',
+        'built_in_class': 'farm_activities.AnimalActivity',
+    },
+    'animal_lactating_activity': {
+        'name': 'Animal Lactating Activity',
+        'description': 'Animal Lactating Activity',
+        'background_color': "#F9ECC6",
+        'border_color': "#335872",
+        'text_color': "#101B37",
+        'category': 'activity',
+        'id': '00000000-0000-0000-0000-000000000014',
+        'built_in_class': 'farm_activities.AnimalLactatingActivity',
+    }
 }
