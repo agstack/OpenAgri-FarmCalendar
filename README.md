@@ -84,5 +84,5 @@ Use the [Online Swagger Editor](https://editor-next.swagger.io/?url=https://raw.
 
 
 # License
-This project code is licensed under the EUPL 1.2 license, see the LICENSE file for more details.
+This project code is licensed under the Apache License Version 2.0, see the LICENSE file for more details.
 Please note that each service may have different licenses, which can be found their specific source code repository.
