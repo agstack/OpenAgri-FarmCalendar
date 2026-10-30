@@ -27,3 +27,5 @@ venv
 !static/**/*.*
 static_root/*
 logs/*
+helper_scripts/*.csv
+helper_scripts/*.json

@@ -39,7 +39,13 @@ class FarmCrop(FarmAsset):
 
     growth_stage = models.CharField(max_length=255, blank=True, null=True)
 
+    kc_init = models.DecimalField(_('Init-season coefficient (Irrigation)'), max_digits=10, decimal_places=2, blank=True, null=True)
+    kc_mid = models.DecimalField(_('Mid-season coefficient (Irrigation)'), max_digits=10, decimal_places=2, blank=True, null=True)
+    kc_end = models.DecimalField(_('End-season coefficient (Irrigation)'),max_digits=10, decimal_places=2, blank=True, null=True)
+
+
     def __str__(self):
+        # kc_init, kc_mid, kc_end (initial/mid-season/end-season coefficients).
         return f"{self.name} - {self.species} - {self.variety} - {self.growth_stage}"
 
 

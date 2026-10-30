@@ -39,7 +39,7 @@ class Farm(BaseModel):
 
 class FarmParcel(BaseModel, LocationBaseModel):
 
-    identifier = models.CharField(max_length=255, unique=True, blank=False, null=False,
+    identifier = models.CharField(max_length=255, unique=False, blank=False, null=False,
                                   validators=[])
     farm = models.ForeignKey(Farm, on_delete=models.CASCADE, blank=False, null=False,
                              related_name="farm_parcels")

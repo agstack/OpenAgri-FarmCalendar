@@ -33,6 +33,7 @@ from .views import (
     CompostTurningOperationViewSet,
     AnimalActivityViewSet,
     AnimalLactatingActivityViewSet,
+    BulkAnimalLactatingActivitiesView
 )
 
 router = routers.DefaultRouter()
@@ -80,6 +81,7 @@ urlpatterns = [
     path('api/<str:version>/', include([
         path('', include(router.urls)),  # Register versioned API routes
         path('', include(compost_operations_router.urls)),  # Register versioned API routes
+        path('bulk/animal-lactating-activities/', BulkAnimalLactatingActivitiesView.as_view(), name='bulk-animal-lactating-activities'),
         path('schema/', SpectacularAPIView.as_view(), name='schema'),  # Schema generation
         path('schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),  # Swagger UI
         path('schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),  # ReDoc

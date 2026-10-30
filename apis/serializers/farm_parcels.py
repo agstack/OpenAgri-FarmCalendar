@@ -96,7 +96,7 @@ class FarmSerializer(serializers.ModelSerializer):
         return json_ld_representation
 
 class GeometrySerializerField(serializers.Serializer):
-    asWKT = serializers.CharField(source='geometry')
+    asWKT = serializers.CharField(source='geometry', allow_null=True)
 
     def to_representation(self, instance):
 
@@ -137,7 +137,7 @@ class FarmParcelSerializer(serializers.ModelSerializer):
     isIrrigated = serializers.BooleanField(source='is_irrigated')
     isCultivatedInLevels = serializers.BooleanField(source='is_cultivated_in_levels')
     isGroundSlope = serializers.BooleanField(source='is_ground_slope')
-    hasGeometry = GeometrySerializerField(source='*')
+    hasGeometry = GeometrySerializerField(source='*', allow_null=True)
     location = LocationSerializerField(source='*')
 
     farm = URNRelatedField(class_names=['Farm'], queryset=Farm.objects.all())

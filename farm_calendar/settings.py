@@ -102,13 +102,18 @@ if GATEKEEPER_LOGIN_URL is not None:
 none_if_empty_cast = lambda x: None if x == '' else x
 AGSTACK_ASSET_REGISTY_API_URL = config('AGSTACK_ASSET_REGISTY_API_URL', default=None, cast=none_if_empty_cast)
 
-AGSTACK_CLIENT_SECRET = None
-AGSTACK_API_KEY = None
+AGSTACK_USER = None
+AGSTACK_PASS = None
+
+AGSTACK_AUTO_FALLBACK = config('AGSTACK_AUTO_FALLBACK', default=True, cast=bool)
+AGSTACK_GEOID_PREFIX = config('AGSTACK_GEOID_PREFIX', default='agstack:')
 if AGSTACK_ASSET_REGISTY_API_URL is not None:
-    AGSTACK_CLIENT_SECRET = config('AGSTACK_CLIENT_SECRET')
-    AGSTACK_API_KEY = config('AGSTACK_API_KEY')
+    AGSTACK_USER = config('AGSTACK_USER')
+    AGSTACK_PASS = config('AGSTACK_PASS')
+
     AGSTACK_ENDPOINTS = {
         'register_field_boundary': config('AGSTACK_ENDPOINT_REGISTER_FIELD_BOUNDARY', default='/register-field-boundary'),
+        'login': config('AGSTACK_ENDPOINT_LOGIN', default='/users/login'),
     }
 
 

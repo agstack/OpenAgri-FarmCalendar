@@ -42,7 +42,7 @@ class LocationBaseModel(models.Model):
     longitude = models.DecimalField(_('Longitude'), max_digits=17, decimal_places=14, blank=True, null=True)
 
     geometry = models.TextField(_('Geometry (WKT EPSG:4326)'), blank=True, null=True)
-    geo_id = models.CharField(_('Geographic Data ID'), unique=True, blank=True, null=True)
+    geo_id = models.CharField(_('Geographic Data ID'), unique=False, blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -61,8 +61,15 @@ class LocationBaseModel(models.Model):
         if self.geometry:
             if settings.AGSTACK_ASSET_REGISTY_API_URL:
                 if self._check_geometry_is_new(self.geometry):
-                    agstack_client = AgstackClient()
-                    self.geo_id = agstack_client.register_field_boundary(self.geometry)
+                    try:
+                        agstack_client = AgstackClient()
+                        self.geo_id = f'{settings.AGSTACK_GEOID_PREFIX}{agstack_client.register_field_boundary(self.geometry)}'
+                    except Exception as e:
+                        if settings.AGSTACK_AUTO_FALLBACK:
+                            # fallback to internal id UUID based on the geometry string
+                            self.geo_id = uuid.uuid5(uuid.NAMESPACE_DNS, self.geometry)
+                        else:
+                            raise e
             else:
                 # Generate UUID based on the geometry string
                 self.geo_id = uuid.uuid5(uuid.NAMESPACE_DNS, self.geometry)
